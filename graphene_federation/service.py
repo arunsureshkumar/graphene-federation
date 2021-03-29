@@ -45,7 +45,7 @@ def _mark_provides(entity_name, entity, schema, auto_camelcase):
     )
 
 
-def get_sdl(schema, custom_entities):
+def get_sdl(schema, custom_entities, auto_camelcase=True):
     string_schema = str(schema)
     string_schema = string_schema.replace("\n", " ")
 
@@ -61,11 +61,11 @@ def get_sdl(schema, custom_entities):
 
     for entity in provides_parent_types:
         string_schema = _mark_provides(
-            entity.__name__, entity, string_schema, schema.auto_camelcase)
+            entity.__name__, entity, string_schema, auto_camelcase)
 
     for entity_name, entity in extended_types.items():
-        string_schema = _mark_external(entity_name, entity, string_schema, schema.auto_camelcase)
-        string_schema = _mark_requires(entity_name, entity, string_schema, schema.auto_camelcase)
+        string_schema = _mark_external(entity_name, entity, string_schema, auto_camelcase)
+        string_schema = _mark_requires(entity_name, entity, string_schema, auto_camelcase)
 
         type_def_re = r"type %s ([^\{]*)" % entity_name
         type_def = r"type %s " % entity_name
@@ -77,8 +77,8 @@ def get_sdl(schema, custom_entities):
     return string_schema
 
 
-def get_service_query(schema):
-    sdl_str = get_sdl(schema, custom_entities)
+def get_service_query(schema, auto_camelcase=True):
+    sdl_str = get_sdl(schema, custom_entities, auto_camelcase)
 
     class _Service(ObjectType):
         sdl = String()

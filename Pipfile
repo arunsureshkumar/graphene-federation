@@ -1,20 +1,13 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
-
 pytest = "*"
 
-
 [packages]
-
-graphene = "*"
-
+graphene = "==3.0b7"
 
 [requires]
-
 python_version = "3.6"

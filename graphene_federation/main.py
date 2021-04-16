@@ -17,6 +17,6 @@ def _get_query(schema, query_cls=None, auto_camelcase=True):
 
 
 def build_schema(query=None, mutation=None, auto_camelcase=True, **kwargs):
-    schema = graphene.Schema(query=query, mutation=mutation, auto_camelcase=auto_camelcase ** kwargs)
+    schema = graphene.Schema(query=query, mutation=mutation, auto_camelcase=auto_camelcase, **kwargs)
     return graphene.Schema(query=_get_query(schema, query, auto_camelcase), mutation=mutation,
                            auto_camelcase=auto_camelcase, **kwargs)
